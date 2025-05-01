@@ -74,7 +74,7 @@
                     <a class="nav-link" href="#">Movimiento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Usuarios</a>
+                    <a class="nav-link" href="Dashboard_Usuarios.php">Usuarios</a>
                 </li>
             </ul>
 
