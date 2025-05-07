@@ -1,4 +1,4 @@
--- Estructura de la base de datos
+-- Esssgstructura de la base de datoss
 CREATE DATABASE IF NOT EXISTS sistema_inventario;
 USE sistema_inventario;
 drop database sistema_inventario;
@@ -26,7 +26,29 @@ CREATE TABLE Permisos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL
 );
+INSERT INTO Permisos (nombre) VALUES
+-- Inventario
+('Ver productos'),
+('Crear productos'),
+('Editar productos'),
+('Eliminar productos'),
 
+-- Reportes
+('Ver reportes'),
+('Exportar reportes'),
+('Acceso a analítica'),
+
+-- Gestión de Usuarios
+('Ver usuarios'),
+('Crear usuarios'),
+('Editar usuarios'),
+('Eliminar usuarios'),
+
+-- Configuración del Sistema
+('Ver configuración'),
+('Editar configuración'),
+('Realizar copias de seguridad');
+--------------------------------------------------
 
 CREATE TABLE Roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +56,19 @@ CREATE TABLE Roles (
 );
 INSERT INTO Roles (nombre) VALUES ('Master_Admin'), ('admin'), ('user');
 
+CREATE TABLE RolPermisos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    rol_id INT NOT NULL,
+    permiso_id INT NOT NULL,
+    FOREIGN KEY (rol_id) REFERENCES Roles(id),
+    FOREIGN KEY (permiso_id) REFERENCES Permisos(id)
+);
 
+-- Suponiendo que Master_Admin tiene id = 1
+INSERT INTO RolPermisos (rol_id, permiso_id)
+SELECT 1, id FROM Permisos;
+
+---------------------------------------------------------------------------------------------------
 -- Tabla de categorías de productos
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
