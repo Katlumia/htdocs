@@ -140,9 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="d-grid mb-3">
                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
             </div>
-            <div class="register-link">
-                <p>¿No tienes una cuenta? <a href="registro.php">Regístrate</a></p>
-            </div>
+            
         </form>
     </div>
 
