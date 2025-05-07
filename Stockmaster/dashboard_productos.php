@@ -110,20 +110,23 @@
         
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="dashboard.php">Inicio</a>
+            <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="Screen_productos.php">Productos</a>
+                    <a class="nav-link active" href="dashboard_productos.php">Productos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Categorías</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Proveedores</a>
+                    <a class="nav-link" href="#">Reportes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Usuarios</a>
+                    <a class="nav-link" href="#">Movimiento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Dashboard_Usuarios.php">Usuarios</a>
                 </li>
             </ul>
 
