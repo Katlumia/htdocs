@@ -1,0 +1,71 @@
+<?php
+include 'connection.php'; // Asegúrate que aquí está tu conexión MySQL
+
+$nombre = $_POST['firstName'];
+$email = $_POST['email'];
+$telefono = $_POST['phoneNumber'];
+$usuario = $_POST['username'];
+$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+$rolNombre = $_POST['userRole'];
+$estado = isset($_POST['userStatus']) ? 1 : 0;
+$permisosSeleccionados = json_decode($_POST['permisos'], true);
+
+// Buscar ID del rol
+$stmt = $conn->prepare("SELECT id FROM Roles WHERE nombre = ?");
+$stmt->bind_param("s", $rolNombre);
+$stmt->execute();
+$result = $stmt->get_result();
+$rol = $result->fetch_assoc();
+$rol_id = $rol ? $rol['id'] : null;
+
+if (!$rol_id) {
+    echo json_encode(["message" => "Rol no válido"]);
+    exit;
+}
+
+// Guardar el usuario
+$stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, telefono, nombre_usuario, password, rol_id) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssi", $nombre, $email, $telefono, $usuario, $password, $rol_id);
+$stmt->execute();
+$usuario_id = $stmt->insert_id;
+
+// Obtener todos los permisos de la base de datos
+$permisosMap = [];
+$result = $conn->query("SELECT id, nombre FROM Permisos");
+while ($row = $result->fetch_assoc()) {
+    $permisosMap[$row['nombre']] = $row['id'];
+}
+
+// Asignar permisos personalizados
+foreach ($permisosSeleccionados as $permisoNombre) {
+    $nombreAmigable = permisoNombreDesdeId($permisoNombre); // Mapear checkbox ID a nombre
+    if (isset($permisosMap[$nombreAmigable])) {
+        $permiso_id = $permisosMap[$nombreAmigable];
+        $stmt = $conn->prepare("INSERT INTO RolPermisos (rol_id, permiso_id) VALUES (?, ?)");
+        $stmt->bind_param("ii", $rol_id, $permiso_id);
+        $stmt->execute();
+    }
+}
+
+echo json_encode(["message" => "Usuario creado correctamente"]);
+
+function permisoNombreDesdeId($id) {
+    $map = [
+        'viewProducts' => 'Ver productos',
+        'createProducts' => 'Crear productos',
+        'editProducts' => 'Editar productos',
+        'deleteProducts' => 'Eliminar productos',
+        'viewReports' => 'Ver reportes',
+        'exportReports' => 'Exportar reportes',
+        'analyticsAccess' => 'Acceso a analítica',
+        'viewUsers' => 'Ver usuarios',
+        'createUsers' => 'Crear usuarios',
+        'editUsers' => 'Editar usuarios',
+        'deleteUsers' => 'Eliminar usuarios',
+        'viewSettings' => 'Ver configuración',
+        'editSettings' => 'Editar configuración',
+        'systemBackup' => 'Realizar copias de seguridad'
+    ];
+    return $map[$id] ?? '';
+}
+?>

@@ -3,10 +3,7 @@ require_once 'connection.php';
 session_start();
 
 function sanitize_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+    return htmlspecialchars(stripslashes(trim($data)));
 }
 
 $login_err = "";
@@ -15,12 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = sanitize_input($_POST["usuario"]);
     $password = $_POST["password"];
     
-    // Consulta actualizada para incluir el nombre del rol
+    // Consulta con los campos correctos
     $stmt = $conn->prepare("
-        SELECT u.id, u.usuario, u.password, u.nombre, r.nombre AS rol
+        SELECT u.id, u.nombre_usuario, u.password, u.nombre, r.nombre AS rol
         FROM usuarios u
-        LEFT JOIN Roles r ON u.id_rol = r.id
-        WHERE u.usuario = ?
+        LEFT JOIN Roles r ON u.rol_id = r.id
+        WHERE u.nombre_usuario = ?
     ");
 
     if ($stmt === false) {
@@ -33,21 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows == 1) {
             $user = $result->fetch_assoc();
             
-            // Comparación directa (sin hash)
+            // Verificar la contraseña
             if ($password === $user["password"]) {
                 session_regenerate_id();
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $user["id"];
-                $_SESSION["usuario"] = $user["usuario"];
+                $_SESSION["usuario"] = $user["nombre_usuario"];
                 $_SESSION["nombre"] = $user["nombre"];
                 $_SESSION["rol"] = $user["rol"];
 
-                // Redirige según el rol
-                if ($user["rol"] === "Master_Admin" || $user["rol"] === "admin") {
-                    header("location: dashboard.php");
-                } else {
-                    header("location: dashboard.php");
-                }
+                header("location: dashboard.php");
                 exit;
             } else {
                 $login_err = "Usuario o contraseña incorrectos.";
@@ -60,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>

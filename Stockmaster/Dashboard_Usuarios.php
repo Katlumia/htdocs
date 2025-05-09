@@ -410,383 +410,204 @@
 
 <!-- Add User Modal -->
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addUserModalLabel">Añadir Nuevo Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUserModalLabel">Añadir Nuevo Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addUserForm" method="POST" enctype="multipart/form-data">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="firstName" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="firstName" name="firstName" required>
             </div>
-            <div class="modal-body">
-                <form id="addUserForm">
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="firstName" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="firstName" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="lastName" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="lastName" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="phoneNumber" class="form-label">Teléfono</label>
-                            <input type="tel" class="form-control" id="phoneNumber">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="username" class="form-label">Nombre Usuario</label>
-                            <input type="text" class="form-control" id="username" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="userRole" class="form-label">Rol</label>
-                            <select class="form-select" id="userRole" required>
-                                <option value="" selected disabled>Seleccionar rol</option>
-                                <option value="admin">Administrador</option>
-                                <option value="supervisor">Supervisor</option>
-                                <option value="operador">Operador</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="password" required>
-                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="confirmPassword" required>
-                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- User Permissions -->
-                    <h5 class="mt-4 mb-3">Permisos</h5>
-                    
-                    <!-- Inventory Permissions -->
-                    <div class="permission-group">
-                        <div class="permission-title">Inventario</div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="viewProducts">
-                                    <label class="form-check-label" for="viewProducts">Ver productos</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="createProducts">
-                                    <label class="form-check-label" for="createProducts">Crear productos</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editProducts">
-                                    <label class="form-check-label" for="editProducts">Editar productos</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="deleteProducts">
-                                    <label class="form-check-label" for="deleteProducts">Eliminar productos</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Reports Permissions -->
-                    <div class="permission-group">
-                        <div class="permission-title">Reportes</div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="viewReports">
-                                    <label class="form-check-label" for="viewReports">Ver reportes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="exportReports">
-                                    <label class="form-check-label" for="exportReports">Exportar reportes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="analyticsAccess">
-                                    <label class="form-check-label" for="analyticsAccess">Acceso a analítica</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- User Management Permissions -->
-                    <div class="permission-group">
-                        <div class="permission-title">Gestión de Usuarios</div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="viewUsers">
-                                    <label class="form-check-label" for="viewUsers">Ver usuarios</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="createUsers">
-                                    <label class="form-check-label" for="createUsers">Crear usuarios</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editUsers">
-                                    <label class="form-check-label" for="editUsers">Editar usuarios</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="deleteUsers">
-                                    <label class="form-check-label" for="deleteUsers">Eliminar usuarios</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- System Settings Permissions -->
-                    <div class="permission-group">
-                        <div class="permission-title">Configuración del Sistema</div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="viewSettings">
-                                    <label class="form-check-label" for="viewSettings">Ver configuración</label>
-                                </div>
-                            </div>
-<div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editSettings">
-                                    <label class="form-check-label" for="editSettings">Editar configuración</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="systemBackup">
-                                    <label class="form-check-label" for="systemBackup">Realizar copias de seguridad</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-check form-switch mt-4">
-                        <input class="form-check-input" type="checkbox" id="userStatus" checked>
-                        <label class="form-check-label" for="userStatus">Usuario activo</label>
-                    </div>
-                </form>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Guardar Usuario</button>
+            <div class="col-md-6">
+              <label for="phoneNumber" class="form-label">Teléfono</label>
+              <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber">
             </div>
-        </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="username" class="form-label">Nombre Usuario</label>
+              <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="col-md-6">
+              <label for="userRole" class="form-label">Rol</label>
+              <select class="form-select" id="userRole" name="userRole" required>
+                <option value="" selected disabled>Seleccionar rol</option>
+                <option value="admin">Administrador</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="operador">Operador</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="profilePhoto" class="form-label">Foto de Perfil</label>
+              <input class="form-control" type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" required>
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="mt-4 mb-3">Permisos</h5>
+
+          <!-- Inventario -->
+          <div class="permission-group">
+            <div class="permission-title">Inventario</div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="ver_productos" id="viewProducts">
+                  <label class="form-check-label" for="viewProducts">Ver productos</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="crear_productos" id="createProducts">
+                  <label class="form-check-label" for="createProducts">Crear productos</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="editar_productos" id="editProducts">
+                  <label class="form-check-label" for="editProducts">Editar productos</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="eliminar_productos" id="deleteProducts">
+                  <label class="form-check-label" for="deleteProducts">Eliminar productos</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reportes -->
+          <div class="permission-group">
+            <div class="permission-title">Reportes</div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="ver_reportes" id="viewReports">
+                  <label class="form-check-label" for="viewReports">Ver reportes</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="exportar_reportes" id="exportReports">
+                  <label class="form-check-label" for="exportReports">Exportar reportes</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="acceso_analitica" id="analyticsAccess">
+                  <label class="form-check-label" for="analyticsAccess">Acceso a analítica</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gestión de Usuarios -->
+          <div class="permission-group">
+            <div class="permission-title">Gestión de Usuarios</div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="ver_usuarios" id="viewUsers">
+                  <label class="form-check-label" for="viewUsers">Ver usuarios</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="crear_usuarios" id="createUsers">
+                  <label class="form-check-label" for="createUsers">Crear usuarios</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="editar_usuarios" id="editUsers">
+                  <label class="form-check-label" for="editUsers">Editar usuarios</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="eliminar_usuarios" id="deleteUsers">
+                  <label class="form-check-label" for="deleteUsers">Eliminar usuarios</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Configuración del Sistema -->
+          <div class="permission-group">
+            <div class="permission-title">Configuración del Sistema</div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="ver_configuracion" id="viewSettings">
+                  <label class="form-check-label" for="viewSettings">Ver configuración</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="editar_configuracion" id="editSettings">
+                  <label class="form-check-label" for="editSettings">Editar configuración</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="permisos[]" value="backup_sistema" id="systemBackup">
+                  <label class="form-check-label" for="systemBackup">Realizar copias de seguridad</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-check form-switch mt-4">
+            <input class="form-check-input" type="checkbox" id="userStatus" name="userStatus" checked>
+            <label class="form-check-label" for="userStatus">Usuario activo</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" form="addUserForm" class="btn btn-primary">Guardar Usuario</button>
+      </div>
     </div>
+  </div>
 </div>
 
-<!-- Edit User Modal -->
-<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center mb-4">
-                    <img src="user-removebg.png" class="rounded-circle user-profile-img" alt="Profile Image">
-                    <div class="mt-2">
-                        <button class="btn btn-sm btn-outline-secondary">Cambiar imagen</button>
-                    </div>
-                </div>
-                
-                <form id="editUserForm">
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="editFirstName" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="editFirstName" value="María" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="editLastName" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="editLastName" value="González" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="editEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" value="maria.gonzalez@stockmaster.com" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="editPhoneNumber" class="form-label">Teléfono</label>
-                            <input type="tel" class="form-control" id="editPhoneNumber" value="555-123-4567">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="editUsername" class="form-label">Nombre Usuario</label>
-                            <input type="text" class="form-control" id="editUsername" value="mariag" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="editUserRole" class="form-label">Rol</label>
-                            <select class="form-select" id="editUserRole" required>
-                                <option value="admin" selected>Administrador</option>
-                                <option value="supervisor">Supervisor</option>
-                                <option value="operador">Operador</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- User Permissions -->
-                    <h5 class="mt-4 mb-3">Permisos</h5>
-                    
-                    <!-- Inventory Permissions -->
-                    <div class="permission-group">
-                        <div class="permission-title">Inventario</div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editViewProducts" checked>
-                                    <label class="form-check-label" for="editViewProducts">Ver productos</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editCreateProducts" checked>
-                                    <label class="form-check-label" for="editCreateProducts">Crear productos</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editEditProducts" checked>
-                                    <label class="form-check-label" for="editEditProducts">Editar productos</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editDeleteProducts" checked>
-                                    <label class="form-check-label" for="editDeleteProducts">Eliminar productos</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Similar permission groups as in the Add User form -->
-                    <div class="permission-group">
-                        <div class="permission-title">Reportes</div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editViewReports" checked>
-                                    <label class="form-check-label" for="editViewReports">Ver reportes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editExportReports" checked>
-                                    <label class="form-check-label" for="editExportReports">Exportar reportes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editAnalyticsAccess" checked>
-                                    <label class="form-check-label" for="editAnalyticsAccess">Acceso a analítica</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="permission-group">
-                        <div class="permission-title">Gestión de Usuarios</div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editViewUsers" checked>
-                                    <label class="form-check-label" for="editViewUsers">Ver usuarios</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editCreateUsers" checked>
-                                    <label class="form-check-label" for="editCreateUsers">Crear usuarios</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editEditUsers" checked>
-                                    <label class="form-check-label" for="editEditUsers">Editar usuarios</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editDeleteUsers" checked>
-                                    <label class="form-check-label" for="editDeleteUsers">Eliminar usuarios</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="permission-group">
-                        <div class="permission-title">Configuración del Sistema</div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editViewSettings" checked>
-                                    <label class="form-check-label" for="editViewSettings">Ver configuración</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editEditSettings" checked>
-                                    <label class="form-check-label" for="editEditSettings">Editar configuración</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="editSystemBackup" checked>
-                                    <label class="form-check-label" for="editSystemBackup">Realizar copias de seguridad</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-check form-switch mt-4">
-                        <input class="form-check-input" type="checkbox" id="editUserStatus" checked>
-                        <label class="form-check-label" for="editUserStatus">Usuario activo</label>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <small class="text-muted">
-                            <i class="fas fa-info-circle me-1"></i>Último acceso: Hoy 10:34
-                        </small>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Reset Password Modal -->
 <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
@@ -943,5 +764,27 @@
         // Reset the filtering (in a real app, would trigger refetching data)
     });
 </script>
+<script>
+document.querySelector('.btn.btn-primary').addEventListener('click', function () {
+    const form = document.getElementById('addUserForm');
+    const formData = new FormData(form);
+
+    // Captura permisos seleccionados
+    const permisos = [];
+    form.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+        permisos.push(checkbox.id); // ID del checkbox debe coincidir con el nombre en la tabla Permisos
+    });
+    formData.append('permisos', JSON.stringify(permisos));
+
+    fetch('procesar_usuario.php', {
+        method: 'POST',
+        body: formData
+    }).then(res => res.json())
+      .then(data => {
+          alert(data.message);
+      });
+});
+</script>
+
 </body>
 </html>
