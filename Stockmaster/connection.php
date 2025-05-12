@@ -10,3 +10,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 ?>
+<?php
+$conn = new mysqli('localhost', 'usuario', 'contraseña', 'sistema_inventario');
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+?>

@@ -602,7 +602,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" form="addUserForm" class="btn btn-primary">Guardar Usuario</button>
+        <button type="button" class="btn btn-primary" id="guardarUsuarioBtn">Guardar Usuario</button>
       </div>
     </div>
   </div>
@@ -765,26 +765,49 @@
     });
 </script>
 <script>
-document.querySelector('.btn.btn-primary').addEventListener('click', function () {
+document.getElementById('guardarUsuarioBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+
     const form = document.getElementById('addUserForm');
     const formData = new FormData(form);
 
-    // Captura permisos seleccionados
+    // Validar que las contraseñas coincidan
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+    if (password !== confirmPassword) {
+        alert('Las contraseñas no coinciden.');
+        return;
+    }
+
+    // Capturar permisos seleccionados
     const permisos = [];
     form.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-        permisos.push(checkbox.id); // ID del checkbox debe coincidir con el nombre en la tabla Permisos
+        permisos.push(checkbox.value); // Usa el atributo "value"
     });
-    formData.append('permisos', JSON.stringify(permisos));
+    formData.set('permisos', JSON.stringify(permisos));
 
     fetch('procesar_usuario.php', {
         method: 'POST',
         body: formData
-    }).then(res => res.json())
-      .then(data => {
-          alert(data.message);
-      });
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
+            modal.hide();
+            form.reset();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al guardar el usuario.');
+    });
 });
 </script>
+
+
 
 </body>
 </html>
