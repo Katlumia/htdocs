@@ -20,6 +20,7 @@ try {
     $rol        = $_POST['userRole'];
     $activo     = isset($_POST['userStatus']) ? 1 : 0;
     $permisos   = json_decode($_POST['permisos'] ?? '[]');
+    $foto = $_FILES['profilePhoto']; // Aquí debería llegar la imagen correctamente
 
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $rol_id = getRolId($rol, $conn);

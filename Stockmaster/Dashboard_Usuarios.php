@@ -229,163 +229,30 @@
             <div class="tab-content" id="nav-tabContent">
                 <!-- Grid View -->
                 <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
-                    <div class="row g-3">
-                        <!-- User Card 1 -->
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card user-card h-100">
-                                <div class="card-body text-center">
-                                    <img src="user-removebg.png" class="rounded-circle mb-3" width="100" height="100">
-                                    <h5 class="card-title mb-1">María González</h5>
-                                    <p class="card-text text-muted">maria.gonzalez@stockmaster.com</p>
-                                    <span class="badge bg-primary role-badge mb-2">Administrador</span>
-                                    <p class="mb-0"><i class="fas fa-circle status-active me-1"></i> Activo</p>
-                                </div>
-                                <div class="card-footer bg-transparent d-flex justify-content-center">
-                                    <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                    <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                    <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- User Card 2 -->
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card user-card h-100">
-                                <div class="card-body text-center">
-                                    <img src="user-removebg.png" class="rounded-circle mb-3" width="100" height="100">
-                                    <h5 class="card-title mb-1">Juan Pérez</h5>
-                                    <p class="card-text text-muted">juan.perez@stockmaster.com</p>
-                                    <span class="badge bg-info role-badge mb-2">Supervisor</span>
-                                    <p class="mb-0"><i class="fas fa-circle status-active me-1"></i> Activo</p>
-                                </div>
-                                <div class="card-footer bg-transparent d-flex justify-content-center">
-                                    <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                    <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                    <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- User Card 3 -->
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card user-card h-100">
-                                <div class="card-body text-center">
-                                    <img src="user-removebg.png" class="rounded-circle mb-3" width="100" height="100">
-                                    <h5 class="card-title mb-1">Ana López</h5>
-                                    <p class="card-text text-muted">ana.lopez@stockmaster.com</p>
-                                    <span class="badge bg-secondary role-badge mb-2">Operador</span>
-                                    <p class="mb-0"><i class="fas fa-circle status-active me-1"></i> Activo</p>
-                                </div>
-                                <div class="card-footer bg-transparent d-flex justify-content-center">
-                                    <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                    <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                    <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- User Card 4 -->
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card user-card h-100">
-                                <div class="card-body text-center">
-                                    <img src="user-removebg.png" class="rounded-circle mb-3" width="100" height="100">
-                                    <h5 class="card-title mb-1">Carlos Ramírez</h5>
-                                    <p class="card-text text-muted">carlos.ramirez@stockmaster.com</p>
-                                    <span class="badge bg-secondary role-badge mb-2">Operador</span>
-                                    <p class="mb-0"><i class="fas fa-circle status-inactive me-1"></i> Inactivo</p>
-                                </div>
-                                <div class="card-footer bg-transparent d-flex justify-content-center">
-                                    <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                    <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                    <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- More user cards here -->
+                    <div class="row g-3" id="contenedorCartasUsuarios">
+                    <!-- Aquí se cargarán automáticamente las cartas -->
                     </div>
+
                 </div>
                 <!-- Table View -->
                 <div class="tab-pane fade" id="nav-table" role="tabpanel" aria-labelledby="nav-table-tab">
                     <div class="table-responsive">
                         <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Usuario</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Rol</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Último acceso</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="user-removebg.png" class="rounded-circle me-2" width="40" height="40">
-                                            <div>María González</div>
-                                        </div>
-                                    </td>
-                                    <td>maria.gonzalez@stockmaster.com</td>
-                                    <td><span class="badge bg-primary">Administrador</span></td>
-                                    <td><i class="fas fa-circle status-active me-1"></i> Activo</td>
-                                    <td>Hoy 10:34</td>
-                                    <td>
-                                        <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                        <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                        <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="user-removebg.png" class="rounded-circle me-2" width="40" height="40">
-                                            <div>Juan Pérez</div>
-                                        </div>
-                                    </td>
-                                    <td>juan.perez@stockmaster.com</td>
-                                    <td><span class="badge bg-info">Supervisor</span></td>
-                                    <td><i class="fas fa-circle status-active me-1"></i> Activo</td>
-                                    <td>Ayer 15:22</td>
-                                    <td>
-                                        <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                        <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                        <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="user-removebg.png" class="rounded-circle me-2" width="40" height="40">
-                                            <div>Ana López</div>
-                                        </div>
-                                    </td>
-                                    <td>ana.lopez@stockmaster.com</td>
-                                    <td><span class="badge bg-secondary">Operador</span></td>
-                                    <td><i class="fas fa-circle status-active me-1"></i> Activo</td>
-                                    <td>Nunca</td>
-                                    <td>
-                                        <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                        <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                        <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="user-removebg.png" class="rounded-circle me-2" width="40" height="40">
-                                            <div>Carlos Ramírez</div>
-                                        </div>
-                                    </td>
-                                    <td>carlos.ramirez@stockmaster.com</td>
-                                    <td><span class="badge bg-secondary">Operador</span></td>
-                                    <td><i class="fas fa-circle status-inactive me-1"></i> Inactivo</td>
-                                    <td>28 Abr 2023</td>
-                                    <td>
-                                        <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal"></i>
-                                        <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal"></i>
-                                        <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal"></i>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <thead>
+                     <tr>
+                     <th scope="col">Usuario</th>
+                     <th scope="col">Email</th>
+                     <th scope="col">Rol</th>
+                     <th scope="col">Estado</th>
+                     <th scope="col">Último acceso</th>
+                     <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+    <tbody id="tablaUsuarios">
+        <!-- Aquí se insertan las filas dinámicamente -->
+    </tbody>
+</table>
+
                     </div>
                 </div>
             </div>
@@ -804,7 +671,7 @@ document.getElementById('guardarUsuarioBtn').addEventListener('click', function 
     form.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
         permisos.push(checkbox.value);
     });
-    formData.set('permisos', JSON.stringify(permisos));
+    //formData.set('permisos', JSON.stringify(permisos));
 
     // Enviar solicitud al backend
     fetch('procesarusuario.php', {
@@ -838,6 +705,80 @@ document.getElementById('guardarUsuarioBtn').addEventListener('click', function 
     });
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('listar_usuarios.php')
+        .then(res => res.json())
+        .then(usuarios => {
+            // Mostrar cartas
+            const contenedor = document.getElementById('contenedorCartasUsuarios');
+            contenedor.innerHTML = '';
+
+            usuarios.forEach(usuario => {
+                const estadoIcono = usuario.estado === 'Activo'
+                    ? '<i class="fas fa-circle status-active me-1"></i>'
+                    : '<i class="fas fa-circle status-inactive me-1"></i>';
+
+                const card = `
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card user-card h-100">
+                            <div class="card-body text-center">
+                                <img src="${usuario.foto}" class="rounded-circle mb-3" width="100" height="100">
+                                <h5 class="card-title mb-1">${usuario.nombre}</h5>
+                                <p class="card-text text-muted">${usuario.email}</p>
+                                <span class="badge bg-secondary role-badge mb-2">${usuario.rol}</span>
+                                <p class="mb-0">${estadoIcono} ${usuario.estado}</p>
+                            </div>
+                            <div class="card-footer bg-transparent d-flex justify-content-center">
+                                <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${usuario.id}"></i>
+                                <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal" data-id="${usuario.id}"></i>
+                                <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-id="${usuario.id}"></i>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                contenedor.insertAdjacentHTML('beforeend', card);
+            });
+
+            // Mostrar tabla
+            const tabla = document.getElementById('tablaUsuarios');
+            tabla.innerHTML = '';
+
+            usuarios.forEach(usuario => {
+                const estadoIcono = usuario.estado === 'Activo'
+                    ? '<i class="fas fa-circle status-active me-1"></i>'
+                    : '<i class="fas fa-circle status-inactive me-1"></i>';
+
+                const fila = `
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="${usuario.foto}" class="rounded-circle me-2" width="40" height="40">
+                                <div>${usuario.nombre}</div>
+                            </div>
+                        </td>
+                        <td>${usuario.email}</td>
+                        <td><span class="badge bg-secondary">${usuario.rol}</span></td>
+                        <td>${estadoIcono} ${usuario.estado}</td>
+                        <td>No disponible</td>
+                        <td>
+                            <i class="fas fa-edit text-primary action-icon" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${usuario.id}"></i>
+                            <i class="fas fa-key text-warning action-icon" data-bs-toggle="modal" data-bs-target="#resetPasswordModal" data-id="${usuario.id}"></i>
+                            <i class="fas fa-trash-alt text-danger action-icon" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-id="${usuario.id}"></i>
+                        </td>
+                    </tr>
+                `;
+                tabla.insertAdjacentHTML('beforeend', fila);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar usuarios:', error);
+        });
+});
+</script>
+
+
 
 
 </body>
