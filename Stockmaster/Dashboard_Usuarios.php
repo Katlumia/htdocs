@@ -111,7 +111,7 @@
                     <a class="nav-link" href="#">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Screen_productos.php">Productos</a>
+                    <a class="nav-link" href="dashboard_productos.php">Productos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Categorías</a>
@@ -764,6 +764,7 @@
         // Reset the filtering (in a real app, would trigger refetching data)
     });
 </script>
+
 <script>
 document.getElementById('guardarUsuarioBtn').addEventListener('click', function (e) {
     e.preventDefault();
@@ -771,9 +772,27 @@ document.getElementById('guardarUsuarioBtn').addEventListener('click', function 
     const form = document.getElementById('addUserForm');
     const formData = new FormData(form);
 
-    // Validar que las contraseñas coincidan
+    // Obtener y validar campos obligatorios
+    const nombre = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
     const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    const userRole = document.getElementById('userRole').value.trim();
+
+    let errores = [];
+
+    if (!nombre) errores.push('Nombre');
+    if (!email) errores.push('Email');
+    if (!username) errores.push('Nombre de usuario');
+    if (!password) errores.push('Contraseña');
+    if (!confirmPassword) errores.push('Confirmar contraseña');
+    if (!userRole) errores.push('Rol');
+
+    if (errores.length > 0) {
+        alert('Debe completar los siguientes campos:\n- ' + errores.join('\n- '));
+        return;
+    }
 
     if (password !== confirmPassword) {
         alert('Las contraseñas no coinciden.');
@@ -783,15 +802,21 @@ document.getElementById('guardarUsuarioBtn').addEventListener('click', function 
     // Capturar permisos seleccionados
     const permisos = [];
     form.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-        permisos.push(checkbox.value); // Usa el atributo "value"
+        permisos.push(checkbox.value);
     });
     formData.set('permisos', JSON.stringify(permisos));
 
-    fetch('procesar_usuario.php', {
+    // Enviar solicitud al backend
+    fetch('procesarusuario.php', {
         method: 'POST',
         body: formData
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("HTTP error " + res.status);
+        }
+        return res.json();
+    })
     .then(data => {
         alert(data.message);
         if (data.success) {
@@ -801,12 +826,11 @@ document.getElementById('guardarUsuarioBtn').addEventListener('click', function 
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al guardar el usuario.');
+        console.error('Error en el fetch:', error);
+        alert('Hubo un error técnico: ' + error.message);
     });
 });
 </script>
-
 
 
 </body>
