@@ -4,15 +4,12 @@ $user = "root";
 $pass = "";
 $db   = "sistema_inventario";
 
+// Intentar conexión
 $conn = new mysqli($host, $user, $pass, $db);
 
+// Verificar error
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-?>
-<?php
-$conn = new mysqli('localhost', 'usuario', 'contraseña', 'sistema_inventario');
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+    // Lanza excepción en vez de usar die()
+    throw new Exception("Conexión fallida: " . $conn->connect_error);
 }
 ?>

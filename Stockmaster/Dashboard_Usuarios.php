@@ -815,7 +815,14 @@ document.getElementById('guardarUsuarioBtn').addEventListener('click', function 
         if (!res.ok) {
             throw new Error("HTTP error " + res.status);
         }
-        return res.json();
+        return res.text().then(text => {
+    try {
+        return JSON.parse(text);
+    } catch (e) {
+        throw new Error("Respuesta no válida del servidor: " + text);
+    }
+});
+
     })
     .then(data => {
         alert(data.message);
